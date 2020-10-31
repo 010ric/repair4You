@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-tour-of-heroes": {
+    "angular-router-sample": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-tour-of-heroes",
+            "outputPath": "dist/angular-router-sample",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-tour-of-heroes:build"
+            "browserTarget": "angular-router-sample:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-tour-of-heroes:build:production"
+              "browserTarget": "angular-router-sample:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-tour-of-heroes:build"
+            "browserTarget": "angular-router-sample:build"
           }
         },
         "test": {
@@ -110,18 +110,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-tour-of-heroes:serve"
+            "devServerTarget": "angular-router-sample:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-tour-of-heroes:serve:production"
+              "devServerTarget": "angular-router-sample:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "angular-tour-of-heroes",
+  "defaultProject": "angular-router-sample",
   "cli": {
     "analytics": false
   }
