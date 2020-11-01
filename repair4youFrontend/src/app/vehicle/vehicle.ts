@@ -3,6 +3,6 @@ export class Vehicle {
   vehicleBrand: String;
   vehicleLicencePlate: String;
   maintenanceDate: Date;
-  vehicleContactPerson: String;
-  vehicleContactNumber: String;
+  vehicleContactPerson?: String;
+  vehicleContactNumberß: String;
 }

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { MaintenanceOverviewComponent } from './maintenance-overview/maintenance-overview.component';
@@ -9,6 +10,7 @@ import { MaintenanceMeetingComponent } from './maintenance-meeting/maintenance-m
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { VehicleService } from './vehicle/vehicle.service';
 
 const appRoutes: Routes = [
   { path: 'overview', component: MaintenanceOverviewComponent },
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

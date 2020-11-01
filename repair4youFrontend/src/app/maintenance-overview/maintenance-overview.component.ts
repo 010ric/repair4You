@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { VehicleService } from '../vehicle/vehicle.service';
+import { Vehicle } from '../vehicle/vehicle';
 
 @Component({
   selector: 'app-maintenance-overview',
@@ -7,57 +9,36 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./maintenance-overview.component.css']
 })
 export class MaintenanceOverviewComponent implements OnInit {
-  constructor() {}
+  constructor(public vehicleService: VehicleService) {}
 
-  /*
-  
-  id: Numeric (Mandatory),
-  vehicleBrand: String(Mandatory),
-  vehicleLicencePlate: String(Mandatory),
-  maintenanceDate: Date (Mandatory)
-  vehicleContactPerson: String,
-  vehicleContactNumber: String
-  
-  */
-
-  data = [];
-  displayColumns: string[] = [
-    'ID',
+  displayedColumns: string[] = [
+    'Id',
     'vehicleBrand',
     'vehicleLicencePlate',
     'maintenanceDate',
     'vehicleContactPerson',
     'vehicleContactNumber'
   ];
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<Vehicle>();
+  loading = false;
+
+  selectedVehicle: Vehicle = new Vehicle();
+  selectedDate: Date = new Date();
 
   ngOnInit(): void {
-    this.data = this.getData();
-    this.dataSource.data = this.data;
+    this.refresh();
   }
 
-  private getData(): any {
-    return [
-      {
-        year: 1991,
-        movie: 'Critters 3',
-        role: 'Josh',
-        director: 'Kristine Peterson',
-        notes: 'Direct-to-video'
-      },
-      {
-        year: 1992,
-        movie: 'Poison Ivy',
-        role: 'Guy',
-        director: 'Katt Shea',
-        notes: 'Credited as Leonardo Di Caprio'
-      },
-      {
-        year: 1993,
-        movie: "This Boy's Life",
-        role: 'Tobias Toby Wolff',
-        director: 'Michael Caton-Jones'
-      }
-    ];
+  async refresh() {
+    this.loading = true;
+    const data = await this.vehicleService.getVehicles(this.selectedDate);
+    console.log(data);
+    this.dataSource.data = data;
+    this.loading = false;
+  }
+
+  async updateSelectedDate() {
+    this.selectedDate = new Date();
+    this.refresh();
   }
 }
