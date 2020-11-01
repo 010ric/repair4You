@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import {
+  MatDatepickerModule,
+  MatDatepickerInputEvent
+} from '@angular/material/datepicker';
 import { VehicleService } from '../vehicle/vehicle.service';
 import { Vehicle } from '../vehicle/vehicle';
 
@@ -32,13 +36,13 @@ export class MaintenanceOverviewComponent implements OnInit {
   async refresh() {
     this.loading = true;
     const data = await this.vehicleService.getVehicles(this.selectedDate);
-    console.log(data);
     this.dataSource.data = data;
     this.loading = false;
   }
 
-  async updateSelectedDate() {
-    this.selectedDate = new Date();
+  async updateSelectedDate(type: string, event: MatDatepickerInputEvent<Date>) {
+    console.log(event.value);
+    this.selectedDate = new Date(event.value);
     this.refresh();
   }
 }

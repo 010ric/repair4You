@@ -10,7 +10,8 @@ import { MaintenanceMeetingComponent } from './maintenance-meeting/maintenance-m
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
-import { VehicleService } from './vehicle/vehicle.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const appRoutes: Routes = [
   { path: 'overview', component: MaintenanceOverviewComponent },
@@ -35,9 +36,11 @@ const appRoutes: Routes = [
     ),
     BrowserAnimationsModule,
     MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
