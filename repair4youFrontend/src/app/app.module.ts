@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: 'overview', component: MaintenanceOverviewComponent },
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
     MatTableModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

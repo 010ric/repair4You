@@ -4,5 +4,5 @@ export class Vehicle {
   vehicleLicencePlate: String;
   maintenanceDate: Date;
   vehicleContactPerson?: String;
-  vehicleContactNumberß: String;
+  vehicleContactNumber?: String;
 }

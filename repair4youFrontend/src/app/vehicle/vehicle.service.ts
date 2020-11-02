@@ -13,7 +13,6 @@ export class VehicleService {
   private async request(method: string, url: string, data?: any) {
     // We will skip authentication and autorization for now
     // const token = await this.oktaAuth.getAccessToken();
-    console.log('request ' + JSON.stringify(data));
     const result = this.http.request(method, url, {
       body: data,
       responseType: 'json',
@@ -35,6 +34,10 @@ export class VehicleService {
 
   createVehicle(Vehicle: Vehicle) {
     console.log('createVehicle ' + JSON.stringify(Vehicle));
-    return this.request('post', `${baseUrl}/api/maintenance/new`, Vehicle);
+    return this.request(
+      'post',
+      `${baseUrl}/api/maintenance/new`,
+      JSON.stringify(Vehicle)
+    );
   }
 }

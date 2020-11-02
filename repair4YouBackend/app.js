@@ -25,6 +25,11 @@ var allowCrossDomain = function(req, res, next) {
   }
 };
 
+// create application/json parser
+var jsonParser = bodyParser.json();
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser());
@@ -45,13 +50,16 @@ function mandatory_data_provided(request) {
 }
 
 /* route (Post) needs to save JSON (down?) inside local memory (no need for db)  */
-app.post("/api/maintenance/new", (req, res) => {
+app.post("/api/maintenance/new", jsonParser, (req, res) => {
   // Little more time taken, but for now we will redundantly check
   // for mandatory data in the frontend and backend
   // Using Database would help to separate different concerns which now have to be though of
   // e.g. numerating the files or taking care that the local storage does not run out of space
   // Also considered writing all of the data to a single file,
   // but I think file size limit i.e. a size limit would be reached sooner then
+
+  console.log(req);
+  console.log(req.body);
 
   // Mock DATA
   let vehicle = {

@@ -1,2 +1,90 @@
 <h2>Make a new maintenance-appointment</h2>
 <p>Get your maintenance meeting here</p>
+
+<div class="example-container">
+  <div class="form-container">
+    <form [formGroup]="meetingForm" (submit)="submit()">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> Id </mat-label>
+        <input matInput formControlName="id" #id required />
+        <mat-error *ngIf="meetingForm.controls.id.invalid">
+          <span *ngIf="meetingForm.controls.id.errors.required"
+            >This field is mandatory.</span
+          >
+          <span *ngIf="meetingForm.controls.id.errors.pattern"
+            >This field is invalid.</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> vehicleBrand </mat-label>
+        <input
+          matInput
+          formControlName="vehicleBrand"
+          #vehicleBrand
+          required
+          type="vehicleBrand"
+        />
+        <mat-error *ngIf="meetingForm.controls.vehicleBrand.invalid">
+          <span *ngIf="meetingForm.controls.vehicleBrand.errors.required"
+            >This field is mandatory.</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> vehicleLicencePlate </mat-label>
+        <input
+          matInput
+          #vehicleLicencePlate
+          required
+          formControlName="vehicleLicencePlate"
+          type="vehicleLicencePlate"
+        />
+        <mat-error *ngIf="meetingForm.controls.vehicleLicencePlate.invalid">
+          <span *ngIf="meetingForm.controls.vehicleLicencePlate.errors.required"
+            >This field is mandatory.</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> maintenanceDate </mat-label>
+        <input
+          matInput
+          #maintenanceDate
+          required
+          formControlName="maintenanceDate"
+          type="maintenanceDate"
+        />
+        <mat-error *ngIf="meetingForm.controls.maintenanceDate.invalid">
+          <span *ngIf="meetingForm.controls.maintenanceDate.errors.required"
+            >This field is mandatory.</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> vehicleContactPerson </mat-label>
+        <input
+          matInput
+          formControlName="vehicleContactPerson"
+          type="vehicleContactPerson"
+        />
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label> vehicleContactNumber </mat-label>
+        <input
+          matInput
+          formControlName="vehicleContactNumber"
+          type="vehicleContactNumber"
+        />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!meetingForm.valid"
+      >
+        Submit Maintenance Meeting
+      </button>
+    </form>
+  </div>
+</div>
