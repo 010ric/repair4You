@@ -1,0 +1,23 @@
+.example-form {
+  margin-top: 20px;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  min-width: 50px;
+  width: 100%;
+}
+
+.DisplayedErrorMessage {
+  width: inherit;
+}
+
+.form-field {
+  display: table-caption;
+}
+
+#submitButton {
+  margin-top: 20px;
+}

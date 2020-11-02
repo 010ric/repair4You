@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { VehicleService } from '../vehicle/vehicle.service';
 import { Vehicle } from '../vehicle/vehicle';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-maintenance-meeting',
@@ -11,10 +12,12 @@ import { Vehicle } from '../vehicle/vehicle';
 export class MaintenanceMeetingComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    public vehicleService: VehicleService
+    public vehicleService: VehicleService,
+    private router: Router
   ) {}
 
   meetingForm: FormGroup;
+  public errorMessage: string = 'Nothing bad happend yet...';
   newVehicle: Vehicle = new Vehicle();
 
   ngOnInit() {
@@ -32,9 +35,16 @@ export class MaintenanceMeetingComponent implements OnInit {
     if (!this.meetingForm.valid) {
       return;
     }
-    console.log(this.meetingForm.value);
     this.newVehicle = this.meetingForm.value;
     const result = await this.vehicleService.createVehicle(this.newVehicle);
     console.log(result);
+    if (result.success) {
+      this.router.navigate(['overview']);
+    } else if (!result.success) {
+      // Display error message to user
+      this.errorMessage = result.errorMessage;
+    } else {
+      console.log(result);
+    }
   }
 }

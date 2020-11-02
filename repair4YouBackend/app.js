@@ -25,15 +25,12 @@ var allowCrossDomain = function(req, res, next) {
   }
 };
 
+app.use(allowCrossDomain);
+
 // create application/json parser
 var jsonParser = bodyParser.json();
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser());
-app.use(allowCrossDomain);
 
 var server = app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
@@ -58,20 +55,11 @@ app.post("/api/maintenance/new", jsonParser, (req, res) => {
   // Also considered writing all of the data to a single file,
   // but I think file size limit i.e. a size limit would be reached sooner then
 
-  console.log(req);
-  console.log(req.body);
-
   // Mock DATA
-  let vehicle = {
-    id: Math.random(),
-    vehicleBrand: "Toyota",
-    vehicleLicencePlate: "M - SU 910",
-    maintenanceDate: new Date(),
-    vehicleContactPerson: "Max",
-    vehicleContactNumber: "Mustermann"
-  };
-
+  let vehicle = req.body;
   let data = JSON.stringify(vehicle);
+  let successfullWrite = true;
+  let errorText = "No unexpected behaviour";
 
   // 1. check if mandatory data is send in request object, catch errors
   /*
@@ -86,13 +74,17 @@ app.post("/api/maintenance/new", jsonParser, (req, res) => {
     data,
     err => {
       // Checking for errors
-      if (err) throw err;
-
+      if (err) {
+        successfullWrite = false;
+        // Check if typeof err.errorMessage
+        errorText = err.errorMessage;
+        throw err;
+      }
       console.log("Done writing"); // Success
     }
   );
   global_vehicle_counter++;
-  res.send("Successfully safed the vehicle data");
+  res.send({ success: successfullWrite, errorMessage: errorText });
 });
 
 function sameDay(d1, d2) {
@@ -104,7 +96,7 @@ function sameDay(d1, d2) {
 }
 
 /* route (Post) retrieves previously saved information about maintenance based on date */
-app.post("/api/maintenance", (req, res) => {
+app.post("/api/maintenance", urlencodedParser, (req, res) => {
   // As the requirement/circumstance is given, that we have no database we have at least two approaches
   // 1. we will fetch all of the documents and filter them in the backend
   // 2. another usefull approach could be to check all available saved documents if they fullfill the filter predicate

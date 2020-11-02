@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {
+  MatDatepickerModule,
+  MatDatepickerInputEvent
+} from '@angular/material/datepicker';
 import { VehicleService } from '../vehicle/vehicle.service';
 import { Vehicle } from '../vehicle/vehicle';
 

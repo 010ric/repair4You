@@ -17,11 +17,10 @@ export class VehicleService {
       body: data,
       responseType: 'json',
       observe: 'body',
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      }),
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       params: new HttpParams().set('maintenanceDate', data)
     });
+    console.log(result);
     return new Promise<any>((resolve, reject) => {
       result.subscribe(resolve as any, reject as any);
     });
