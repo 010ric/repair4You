@@ -35,8 +35,8 @@ export class MaintenanceOverviewComponent implements OnInit {
 
   async refresh() {
     this.loading = true;
-    const data = await this.vehicleService.getVehicles(this.selectedDate);
-    this.dataSource.data = data;
+    const result = await this.vehicleService.getVehicles(this.selectedDate);
+    this.dataSource.data = result.data;
     this.loading = false;
   }
 

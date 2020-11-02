@@ -102,6 +102,7 @@ app.post("/api/maintenance", urlencodedParser, (req, res) => {
   // 2. another usefull approach could be to check all available saved documents if they fullfill the filter predicate
   // Here I will take approach 1, because I assume loading all the data to the backend once will be more sufficient enough
   // array of strings
+  let successfullWrite = true;
   var vehicles_data = [];
   try {
     let all_data = fs.readdirSync(__dirname + "/vehicles_data");
@@ -127,7 +128,8 @@ app.post("/api/maintenance", urlencodedParser, (req, res) => {
       }
     });
   } catch (error) {
+    successfullWrite = false;
     throw error;
   }
-  res.send(vehicles_data);
+  res.send({ success: successfullWrite, data: vehicles_data });
 });

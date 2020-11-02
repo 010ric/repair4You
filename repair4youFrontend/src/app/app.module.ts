@@ -13,6 +13,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 const appRoutes: Routes = [
   { path: 'overview', component: MaintenanceOverviewComponent },
@@ -20,6 +22,15 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/overview', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
+
+/* 
+
+Nice new issue: ERROR Error: mat-form-field must contain a MatFormFieldControl.
+
+related to: https://github.com/angular/components/issues/7898 && 
+https://stackoverflow.com/questions/53935928/angular-mat-form-field-must-contain-a-matformfieldcontrol/54532814
+
+*/
 
 @NgModule({
   declarations: [
@@ -37,11 +48,14 @@ const appRoutes: Routes = [
     ),
     BrowserAnimationsModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
     ReactiveFormsModule
   ],
+  exports: [MatFormFieldModule, MatInputModule],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
